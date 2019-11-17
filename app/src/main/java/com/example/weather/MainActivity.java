@@ -72,9 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(@NonNull Call<CurrentWeather> call, @NonNull Response<CurrentWeather> response) {
                         if (response.isSuccessful()) {
                             CurrentWeather currentWeather = response.body();
-                            Toast.makeText(MainActivity.this, currentWeather.getCityName(), Toast.LENGTH_SHORT).show();
                             helperSharedPreference.addCurrentWeather(currentWeather);
-                            tvAnswer.setText(city);
 
                         } else {
                             Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_LONG).show();

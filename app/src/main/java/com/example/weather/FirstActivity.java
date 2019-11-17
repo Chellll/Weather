@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.weather.api.CurrentWeather;
@@ -18,6 +21,8 @@ public class FirstActivity extends AppCompatActivity {
 
     private List<CurrentWeather> currentWeathers;
     private RecyclerView rv;
+
+    private Button addCity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +38,14 @@ public class FirstActivity extends AppCompatActivity {
         rv.setLayoutManager(llm);
         rv.setHasFixedSize(true);
 
-
+        addCity = findViewById(R.id.addCity);
+        addCity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FirstActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         initializeData();
         initializeAdapter();
@@ -45,9 +57,7 @@ public class FirstActivity extends AppCompatActivity {
     }
 
     private void initializeAdapter(){
-        RVAdapter adapter = new RVAdapter(currentWeathers);
-        Toast.makeText(FirstActivity.this, String.valueOf(adapter.getItemCount()), Toast.LENGTH_SHORT).show();
-        Toast.makeText(FirstActivity.this, String.valueOf(currentWeathers.size()), Toast.LENGTH_SHORT).show();
+        RVAdapter adapter = new RVAdapter(currentWeathers, helperSharedPreference);
         rv.setAdapter(adapter);
     }
 

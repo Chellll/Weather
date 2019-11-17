@@ -50,6 +50,7 @@ public class HelperSharedPreference {
         for(CurrentWeather e : currentWeathers){
             if(e.getCityName().equalsIgnoreCase(currentWeatherCityName)){
                 currentWeathers.remove(e);
+                mSharedPreferences.edit().putString(CURRENT_WEATHERS_KEY, mGson.toJson(currentWeathers, CURRENT_WEATHERS_TYPE)).apply();
                 return true;
             }
         }
